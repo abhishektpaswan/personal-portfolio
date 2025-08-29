@@ -2,7 +2,7 @@
 
 :root {
   --primary: #e9e3da;   /* Soft Beige - Good for backgrounds */
-  --secondary: #4a3f35; /* Deep Brown - Good for subheadings, accents */
+  --secondary: #ffe0b2; /* Deep Brown - Good for subheadings, accents */
   --accent: #e13827;    /* Vibrant Red - Use for highlights/buttons */
   --light: #bfa88d ;     /* Warm Taupe - Ideal for text on dark bg */
   --dark: #333;      /* Deep Brown - Great for high contrast */
@@ -18,12 +18,14 @@
     --font-size-2xl: 1.5rem;
     --font-size-3xl: 2.652rem;
     --font-size-4xl: 4rem;
-      scroll-behavior: smooth;
+    scroll-behavior: smooth;
 
   }
   
   * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     
     }
     
@@ -33,10 +35,7 @@
       position: relative;
       margin: 0;
       padding: 0;
-      display:flex;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
+      display: block;
     }
     
 
@@ -54,6 +53,9 @@
       z-index: 1000;
     }
 
+    section, .section-one, .about-page {
+      scroll-margin-top: 70px; /* Prevents navbar from covering content */
+    }
 
 
     section {
@@ -92,67 +94,72 @@
       border-radius: 5px; 
     }
 
+@font-face {
+  font-family: "Meta";
+  src: url("https://www.axis-praxis.org/fonts/webfonts/MetaVariableDemo-Set.woff2") format("woff2");
+  font-style: normal;
+  font-weight: normal;
+}
 
-    .bottom-navbar{
-      position:fixed;
-      box-shadow: 0;
-      bottom:10px;
-      left:0;
-      width:100%;
-      display:flex;
-      justify-content:space-between;
-      align-items: center;
-    
-    }
+.highlight-effect {
+  transition: all 0.5s;
+  -webkit-text-stroke: 1px #d6f4f4;
+  font-variation-settings: "wght" 900, "ital" 1;
+  font-size: 1.4em;
+  color: transparent;
+  font-family: "Meta", sans-serif;
+  text-shadow:
+    2px 2px 0px #07bccc,
+    3px 3px 0px #e601c0,
+    4px 4px 0px #e9019a,
+    5px 5px 0px #f40468,
+    6px 6px 5px #482896;
+  cursor: default;
+}
 
-    .bottom-nav-links{
-      display:flex;
-      list-style:none;
-      margin:0;
-      padding: 0;
-      
-    }
-
-    .bottom-nav-links a{
-      
-      padding:8px 12px; 
-      text-decoration: none;   
-    }
+.highlight-effect:hover {
+  font-variation-settings: "wght" 100, "ital" 0;
+  text-shadow: none;
+}
     
 
 .section-one{
   display: flex;
   align-items: center;
   justify-content: center;
+  width:100%;
+  height: auto;
   text-align: center;
-  padding: 20px;
+  padding-top: 80px; /* Prevents navbar overlap */
 }
     
     .welcome-section{
       flex:1;
-      max-width:100%;
+      
       font-family: 'Inter', Arial;
       font-size: 2em;
       font-weight: 300;
       
-      text-align: left;
+      text-align: center;
     }
 
-    .welcome-section h1 h2{
+    .welcome-section h1, .welcome-section h2{
       font-size: var(--font-size-2xl) ;
       
       
-      text-align: left;
+      text-align: center;
     }
     .welcome-section p{
       font-size: var(--font-size-2xl);
       
-      text-align: left;
+      text-align: center;
     }
 
     .hero-btns{
       display: flex;
       gap:15px;
+      justify-content: center;
+      margin-top: 20px; /* Adds spacing below buttons */
     }
 
     .hero-btn, .cv-btn{
@@ -162,7 +169,8 @@
       color: var(--light);
       border-radius: 5px;
       text-decoration: none;
-      transition: 0.3s ease;
+      transition: 1s ease;
+      align-items: center;
   }
   .hero-btn span, .cv-btn span {
     font-size: 0.8em; 
@@ -174,85 +182,63 @@
   .hero-btn:hover, .cv-btn:hover{
     background-color: var(--secondary);
   }
-  
-  .highlight {
-      color: var(--cool-gray);
-      text-shadow: 
-    2px 2px 1px var(--secondary), 
-    2px -1px 1px var(--secondary), 
-    -1px 1px 1px var(--secondary), 
-    -1px -1px 1px var(--secondary), 
-    }
-    
-    .highlight:hover {
-      color: var(--secondary);
-      text-shadow:none;
-    }
-    
-    .highlight.c1:hover {
-      background-color: var(--secondary);
-    }
-    .highlight.c2:hover {
-      background-color: var(--secondary);
-    }
-    .highlight.c3:hover {
-      background-color: var(--secondary);
-    }
-    @media (max-width: 768px) {
-      .section-one {
-        flex-direction: column;
-        text-align: center;
-      }
-    
-      .welcome-section {
-        max-width: 100%; /* Makes it responsive */
-        font-size: 2em; /* Adjust font size for mobile */
-      }
-    
-      .profile-photo {
-        margin-top: 20px; /* Adds spacing */
-      }
 
-      .hero-btns {
-        flex-direction: column;
-        align-items: center;
-      }
+  .bottom-navbar {
+    position: fixed;
+    bottom: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-socials {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Space between icons */
+    margin-top: 20px; /* Adds spacing below buttons */
+  }
+  
+  .hero-socials a {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .hero-socials img {
+    width: 40px; /* Adjust size as needed */
+    height: auto;
+    filter: grayscale(100%); /* Makes icons black & white */
+    transition: filter 0.3s, transform 0.3s;
+  }
+  
+  .hero-socials a:hover img {
+    filter: grayscale(0%); /* Show color on hover */
+    transform: scale(1.2); /* Slight zoom effect */
+  }
+  
+  
+  
+    
+  
+  @media (max-width: 768px) {
+    .section-one {
+      flex-direction: column;
+      text-align: center;
     }
   
-    /*
-    .section-two{
+    .welcome-section {
       display:flex;
       justify-content:center;
+      
       align-items:center;
-      color:grey;
-      background-color:beige;
-      width:100%;
-      height:100vh;
-      
-      border: 1px solid black;
-      text-align:center;
-      
-      padding:50px 0px;
-      margin:60px 0px;
+      max-width: 100%; 
+      font-size: 2em; 
+      justify-content: center;
     }
-    
-    .section-three{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      color:grey;
-      background-color:beige;
-      width:100%;
-      height:100vh;
-      
-      border: 1px solid black;
-      text-align:center;
-    
-     padding:50px 0px;
-      margin:60px 0px;
+
+    .hero-btns {
+      flex-direction: column;
+      align-items: center;
     }
-    
-  */
-    
-    
-    
+  }
